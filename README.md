@@ -4,7 +4,7 @@
     <p><strong>GitBrowse</strong> Learn Anything é um projeto open source que permite aos usuários pesquisar e aprender sobre diversos tópicos escolares usando o ChatGPT (Sem api, utilizamos WebScrap).</p>
 </div>
 
-<img src="learnimg/imagem.png">
+<img src="image.png">
 
 ## IMPORTANTE
 
