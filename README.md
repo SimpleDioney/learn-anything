@@ -6,7 +6,8 @@
 
 <img src="image.png">
 <img src="image2.png">
-## IMPORTANTE
+
+### IMPORTANTE
 
 Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, e caso o Cloudflare barre a aplicaçao, abra uma nova guia, acesse o `chat.openai.com` e faca a validaçao, assim voce fica livre por um longo tempo!
 
