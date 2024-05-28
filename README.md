@@ -43,25 +43,27 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
     pip install -r requirements.txt
     ```
 
-3. Execute as migrações do banco de dados:
+3. Acesse: `learn/views.py` acesse `options.add_argument("user-data-dir=C:/Users/SEU_USUARIO/AppData/Local/Microsoft/Edge/User Data/Selenium")` e troque `SEU_USUARIO` para o usuario de seu computador.
+
+4. Execute as migrações do banco de dados:
 
     ```bash
     python manage.py makemigrations
     python manage.py migrate
     ```
 
-4. Crie um usuario admin:
+5. Crie um usuario admin:
    ```bash
    python manage.py createsuperuser
    ```
 
-5. Inicie o servidor de desenvolvimento:
+6. Inicie o servidor de desenvolvimento:
 
     ```bash
     python manage.py runserver
     ```
     
-6. Abra o navegador e acesse `http://127.0.0.1:8000/` para ver o aplicativo em ação.
+7. Abra o navegador e acesse `http://127.0.0.1:8000/` para ver o aplicativo em ação.
 
 ## Como Usar
 
