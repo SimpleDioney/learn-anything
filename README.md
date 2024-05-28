@@ -81,7 +81,7 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
 
 ## Contribuições
 
-Contribuições para melhorar GitBrowse são sempre bem-vindas! Para contribuir:
+Contribuições para melhorar Learn Anything são sempre bem-vindas! Para contribuir:
 
 1. Faça um fork do repositório.
 2. Crie um novo branch para sua feature ou correção:
