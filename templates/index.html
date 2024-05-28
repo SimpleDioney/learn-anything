@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Anything</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            
+        }
+        ul {
+    list-style-type: none; 
+    padding: 0;           
+    margin: 0;            
+}
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 0;
+            min-height: 70px;
+            border-bottom: #68026b 3px solid;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header a, .btn {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header a:hover, .btn:hover {
+            color: #68026b;
+        }
+        .btn {
+            display: inline-block;
+            background: #444;
+            padding: 7px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .questions {
+            margin: 20px 0;
+            display: none; /* Inicialmente esconde o conteúdo das perguntas */
+        }
+        .question {
+            background: #2d2d2d;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #68026b;
+            border-radius: 5px;
+        }
+        .question h3 {
+            margin: 0 0 10px;
+            color: #ffcc00;
+        }
+        .question p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        #question-form {
+            display: flex;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        #question {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            background: #333;
+            color: #fff;
+        }
+        #category-select {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            background: #333;
+            color: #fff;
+        }
+        #search-input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            background: #333;
+            color: #fff;
+        }
+        #question:focus, #category-select:focus, #search-input:focus {
+            outline: none;
+            background: #444;
+        }
+        .intro-message {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .intro-message h2 {
+            margin-top: 0;
+            color: #ffcc00;
+        }
+        .intro-message p {
+            margin: 10px 0;
+        }
+        .intro-message a {
+            color: #68026b;
+            text-decoration: none;
+        }
+        .intro-message a:hover {
+            text-decoration: underline;
+        }
+        .intro-message img {
+            width: 32px;
+            height: 32px;
+            margin-top: 10px;
+            background-color: transparent; 
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <h1>Learn Anything</h1>
+    </header>
+    <div class="container">
+        <form id="question-form">
+            <input type="text" id="question" placeholder="O que você quer aprender?" required>
+            <button type="submit" class="btn" id="submit-button">Enviar</button>
+        </form>
+        <select id="category-select">
+            <option value="" disabled selected>Selecionar categoria</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" id="search-input" placeholder="Buscar conteúdo">
+        <button type="button" class="btn" id="search-button">Buscar</button>
+        <div class="intro-message" id="intro-message">
+            <h2>Bem-vindo ao Learn Anything!</h2>
+            <p>Para começar, digite o que você quer aprender ou selecione uma categoria do menu.</p>
+            <p>Não pesquise por matéria (ex.: Química). Em vez disso, pesquise por conteúdos específicos relacionados à matéria (ex.: Reações químicas).</p>
+            <p>Este é um projeto open source. Contribuições são bem-vindas!</p>
+            <p>Confira o repositório no GitHub:</p>
+            <a href="https://github.com/SimpleDioney/learn-anything" target="_blank">
+                <img src="{% static 'images/GitHub_logo.png' %}" alt="GitHub">
+            </a>
+            
+            <!-- Adicionando mais informações -->
+            <h3>Como Utilizar o Learn Anything</h3>
+            <ul>
+                <li>Digite tópicos específicos no campo de busca para obter melhores resultados.</li>
+                <li>Navegue pelas categorias disponíveis no menu para explorar diferentes áreas de conhecimento.</li>
+                <li>Utilize a caixa de pesquisa para refinar sua busca e encontrar exatamente o que você precisa.</li>
+            </ul>
+        
+            <h3>Recursos Úteis</h3>
+            <ul>
+                <li><a href="https://embreve.com/" target="_blank">Learn Anything Site Oficial</a></li>
+                <li><a href="https://www.pt.khanacademy.org/" target="_blank">Khan Academy</a> - Recursos gratuitos para várias disciplinas.</li>
+                <li><a href="https://www.coursera.org/" target="_blank">Coursera</a> - Cursos online de universidades e empresas líderes.</li>
+            </ul>
+        
+            <h3>Entre em Contato</h3>
+            <p>Tem alguma dúvida ou sugestão? Entre em contato conosco:</p>
+            <ul>
+                <li>Email: dioneygabriel20@gmail.com</li>
+                <li>GitHub Issues: <a href="https://github.com/SimpleDioney/learn-anything/issues" target="_blank">Reportar um problema</a></li>
+            </ul>
+        </div>
+        
+        <div class="questions" id="questions"></div>
+    </div>
+    <script>
+        function showQuestions() {
+            const questionsDiv = document.getElementById('questions');
+            const introMessage = document.getElementById('intro-message');
+            if (introMessage) {
+                introMessage.style.display = 'none';
+            }
+            questionsDiv.style.display = 'block';
+        }
+
+        function addQuestionToDOM(question, answer) {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+            questionDiv.innerHTML = `<h3>${question}</h3><div>${answer}</div>`;
+            const questionsContainer = document.getElementById('questions');
+            questionsContainer.prepend(questionDiv);
+        }
+
+        document.getElementById('question-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const question = document.getElementById('question').value;
+            const submitButton = document.getElementById('submit-button');
+            submitButton.disabled = true; 
+
+            const response = await fetch('/ask/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'  
+                },
+                body: new URLSearchParams({ 'question': question })
+            });
+            const data = await response.json();
+            document.getElementById('question').value = '';
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+            questionDiv.innerHTML = `<h3>${data.question}</h3><div>${data.answer}</div>`;
+            const questionsContainer = document.getElementById('questions');
+            questionsContainer.innerHTML = ''; 
+            questionsContainer.prepend(questionDiv);
+
+            submitButton.disabled = false; 
+
+            showQuestions(); 
+        });
+
+        document.getElementById('category-select').addEventListener('change', async function(e) {
+            const categoryId = e.target.value;
+            const response = await fetch(`/questions/category/${categoryId}/`);
+            const data = await response.json();
+            const questionsDiv = document.getElementById('questions');
+            questionsDiv.innerHTML = ''; 
+            const categoryHeader = document.createElement('h2');
+            categoryHeader.textContent = data.name;
+            questionsDiv.appendChild(categoryHeader);
+            data.questions.forEach(q => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<h3>${q.question}</h3><div>${q.answers.join('<br>')}</div>`;
+                questionsDiv.appendChild(questionDiv);
+            });
+
+            showQuestions(); 
+        });
+
+        document.getElementById('search-button').addEventListener('click', async function() {
+            const query = document.getElementById('search-input').value;
+            if (query.trim() === '') return;
+
+            const response = await fetch(`/search/?q=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            const questionsDiv = document.getElementById('questions');
+            questionsDiv.innerHTML = ''; 
+            if (data.length > 0) {
+                data.forEach(result => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.classList.add('question');
+                    questionDiv.innerHTML = `<h3>${result.question} - ${result.category}</h3><div>${result.answer}</div>`;
+                    questionsDiv.appendChild(questionDiv);
+                });
+            } else {
+                questionsDiv.innerHTML = '<p>Nenhum resultado encontrado.</p>';
+            }
+
+            showQuestions(); 
+        });
+
+        async function loadQuestions() {
+            const response = await fetch('/questions/');
+            const data = await response.json();
+            const questionsDiv = document.getElementById('questions');
+            questionsDiv.innerHTML = ''; 
+            data.forEach(category => {
+                const categoryHeader = document.createElement('h2');
+                categoryHeader.textContent = category.name;
+                questionsDiv.appendChild(categoryHeader);
+                category.questions.forEach(q => {
+                    addQuestionToDOM(q.question, q.answers.join('<br>'));
+                });
+            });
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>
