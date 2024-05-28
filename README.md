@@ -23,7 +23,7 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
 - Python 3.6 ou superior
 - Django 3.0 ou superior
 - Selenium
-- Microsoft Edge WebDriver
+- Microsoft Edge WebDriver (já esta nos arquivos <3)
 - Navegador Edge
 
 ### Passos para Instalação
