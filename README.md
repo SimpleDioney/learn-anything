@@ -1,7 +1,7 @@
 
 <div align="center">
     <h1>Learn Anything</h1>
-    <p><strong>GitBrowse</strong> Learn Anything é um projeto open source que permite aos usuários pesquisar e aprender sobre diversos tópicos escolares usando o ChatGPT (Sem api, utilizamos WebScrap).</p>
+    <p><strong>Learn Anything</strong> é um projeto open source que permite aos usuários pesquisar e aprender sobre diversos tópicos escolares usando o ChatGPT (Sem api, utilizamos WebScrap).</p>
 </div>
 
 <img src="image.png">
