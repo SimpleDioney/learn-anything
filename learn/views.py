@@ -14,7 +14,7 @@ import re
 driver_path = os.path.join(os.path.dirname(__file__), 'msedgedriver.exe')
 service = EdgeService(executable_path=driver_path)
 options = webdriver.EdgeOptions()
-options.add_argument("user-data-dir=C:/Users/dupla/AppData/Local/Microsoft/Edge/User Data/Selenium")  # Ajuste o caminho do perfil
+options.add_argument("user-data-dir=C:/Users/SEU_USUARIO/AppData/Local/Microsoft/Edge/User Data/Selenium")  # Ajuste o caminho do perfil
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 options.add_argument("--disable-blink-features=AutomationControlled")
