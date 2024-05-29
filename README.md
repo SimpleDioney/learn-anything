@@ -66,7 +66,7 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
     
 7. Abra o navegador e acesse `http://127.0.0.1:8000/` para ver o aplicativo em ação.
 
-## Como Usar
+### Como Usar
 
 ### Interface de Usuário
 
@@ -79,7 +79,7 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
 - **Administração**: Acesse o painel administrativo em `http://127.0.0.1:8000/admin` para gerenciar as perguntas, respostas e categorias.
 - **Adicionar Categoria**: As categorias são adicionadas automaticamente com base na resposta do ChatGPT. Caso precise adicionar manualmente, vá ao painel admin e adicione uma nova categoria.
 
-## Contribuições
+### Contribuições
 
 Contribuições para melhorar Learn Anything são sempre bem-vindas! Para contribuir:
 
@@ -94,11 +94,11 @@ Contribuições para melhorar Learn Anything são sempre bem-vindas! Para contri
    git push origin minha-feature
    ```
 
-## Apoio
+### Apoio
 
 Para apoiar o desenvolvimento contínuo e melhorias, considere tornar-se um patrocinador no Patreon:
 [![Apoie no Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://patreon.com/SimpleDioney)
 
-## Licença
+### Licença
 
 Distribuído sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
