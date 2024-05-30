@@ -11,14 +11,12 @@
             margin: 0;
             padding: 0;
             color: #ffffff;
-            
         }
         ul {
-    list-style-type: none; 
-    padding: 0;           
-    margin: 0;            
-}
-
+            list-style-type: none; 
+            padding: 0;           
+            margin: 0;            
+        }
         .container {
             width: 80%;
             margin: auto;
@@ -136,9 +134,39 @@
             margin-top: 10px;
             background-color: transparent; 
         }
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: #ffcc00;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAM25K2J440xBL5fcCpvz13AHtgXR9JOIQ",
+    authDomain: "learnanything-2420b.firebaseapp.com",
+    projectId: "learnanything-2420b",
+    storageBucket: "learnanything-2420b.appspot.com",
+    messagingSenderId: "329006687056",
+    appId: "1:329006687056:web:f20ba7ccc67aa07ebec255",
+    measurementId: "G-FCR4GZLPBF"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
     {% load static %}
     <header>
         <h1>Learn Anything</h1>
@@ -156,6 +184,7 @@
         </select>
         <input type="text" id="search-input" placeholder="Buscar conteúdo">
         <button type="button" class="btn" id="search-button">Buscar</button>
+        <div class="loading" id="loading-message">Carregando</div>
         <div class="intro-message" id="intro-message">
             <h2>Bem-vindo ao Learn Anything!</h2>
             <p>Para começar, digite o que você quer aprender ou selecione uma categoria do menu.</p>
@@ -209,11 +238,23 @@
             questionsContainer.prepend(questionDiv);
         }
 
+        function animateLoadingMessage() {
+            const loadingMessage = document.getElementById('loading-message');
+            let dots = 0;
+            return setInterval(() => {
+                dots = (dots + 1) % 4;
+                loadingMessage.textContent = 'Carregando' + '.'.repeat(dots);
+            }, 500);
+        }
+
         document.getElementById('question-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const question = document.getElementById('question').value;
             const submitButton = document.getElementById('submit-button');
+            const loadingMessage = document.getElementById('loading-message');
             submitButton.disabled = true; 
+            loadingMessage.style.display = 'block'; 
+            const loadingInterval = animateLoadingMessage(); // Inicia a animação de carregamento
 
             const response = await fetch('/ask/', {
                 method: 'POST',
@@ -232,6 +273,8 @@
             questionsContainer.innerHTML = ''; 
             questionsContainer.prepend(questionDiv);
 
+            clearInterval(loadingInterval); // Para a animação de carregamento
+            loadingMessage.style.display = 'none'; 
             submitButton.disabled = false; 
 
             showQuestions(); 

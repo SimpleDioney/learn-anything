@@ -10,7 +10,6 @@ SECRET_KEY = 'sua_chave_secreta_aqui'
 # Defina como False em produção
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 # Aplicativos instalados
 INSTALLED_APPS = [
@@ -21,6 +20,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'learn',  # Seu aplicativo Django
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.ngrok.io',
+    'https://*.ngrok-free.app',
 ]
 
 # Middleware
@@ -96,6 +100,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Configuração de arquivos de mídia
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.ngrok.io', '.ngrok-free.app']
 
 # Configuração padrão para o campo primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
