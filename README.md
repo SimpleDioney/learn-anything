@@ -36,7 +36,7 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
     cd learn-anything
     ```
 
-2. Crie um ambiente virtual e instale as dependências:
+2. Crie um ambiente virtual (ou não) e instale as dependências:
 
     ```bash
     python -m venv venv
@@ -44,7 +44,7 @@ Ao iniciar o sistema, abrira uma sessao do navegador, faça login em uma conta, 
     pip install -r requirements.txt
     ```
 
-3. Acesse: `learn/views.py` acesse `options.add_argument("user-data-dir=C:/Users/SEU_USUARIO/AppData/Local/Microsoft/Edge/User Data/Selenium")` e troque `SEU_USUARIO` para o usuario de seu computador.
+3. Acesse: `learn/views.py` caso queira definir um chat especifico do chat.openai.com (para não poluir sua conta com muitos chats)
 
 4. Execute as migrações do banco de dados:
 
