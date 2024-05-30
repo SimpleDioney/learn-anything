@@ -49,7 +49,7 @@ def initialize_browser():
             os.makedirs(profile_path)
         browser = webdriver.Firefox(service=service, options=options)
 
-    browser.get('https://chatgpt.com/c/0b7dee3e-7af9-4dad-8d95-ed6c2d239812?model=gpt-4o')
+    browser.get('https://chatgpt.com/')
     WebDriverWait(browser, 60).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'textarea'))
     )
