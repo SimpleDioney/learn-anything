@@ -49,7 +49,7 @@ def initialize_browser():
             os.makedirs(profile_path)
         browser = webdriver.Firefox(service=service, options=options)
 
-    browser.get('https://chatgpt.com/')
+    browser.get('https://chatgpt.com/c/0b7dee3e-7af9-4dad-8d95-ed6c2d239812?model=gpt-4o')
     WebDriverWait(browser, 60).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'textarea'))
     )
@@ -61,9 +61,65 @@ Você é um professor muito habilidoso, você tem amplo conhecimento de todas as
 
 def clean_html(html_content):
     soup = BeautifulSoup(html_content, "html.parser")
+    
+    # Verifica se há uma tag <head>, caso contrário cria uma
+    if not soup.head:
+        head = soup.new_tag('head')
+        soup.insert(0, head)
+    else:
+        head = soup.head
+    
+    # Adiciona um estilo diretamente ao HTML
+    style = soup.new_tag('style')
+    style.string = """
+    sub, sup {
+        display: inline;
+        font-size: smaller;
+        vertical-align: baseline;
+        position: relative;
+    }
+    sub {
+        top: 0.5em;
+    }
+    sup {
+        top: -0.5em;
+    }
+    pre {
+    background-color: #1e1e1e;
+    padding: 1rem;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+code {
+    color: white;
+}
+a {
+color: #800080;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s, transform 0.3s;
+  position: relative;
+}
+    """
+    head.append(style)
+    
     for tag in soup.find_all(['sub', 'sup']):
         if tag.string:
             tag.string = tag.string.replace(' ', '')
+    
+    # Remove o botão de "Copiar código"
+    for button in soup.select('button:contains("Copiar código")'):
+        button.decompose()
+    
+    # Envolve blocos de código em <pre><code>
+    for code_block in soup.find_all('code'):
+        code_block.wrap(soup.new_tag("pre"))
+    
     return str(soup)
 
 def home(request):
@@ -153,7 +209,7 @@ def search_questions(request):
     query = request.GET.get('q', '')
     results = []
     if query:
-        answers = Answer.objects.filter(text__icontains=query).select_related('question__category')
+        answers = Answer.objects.filter(text__icontains=query.select_related('question__category'))
         for answer in answers:
             results.append({
                 'question': answer.question.text,

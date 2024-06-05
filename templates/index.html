@@ -1,342 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learn Anything</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            margin: 0;
-            padding: 0;
-            color: #ffffff;
-        }
-        ul {
-            list-style-type: none; 
-            padding: 0;           
-            margin: 0;            
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 0;
-            min-height: 70px;
-            border-bottom: #68026b 3px solid;
-        }
-        header h1 {
-            margin: 0;
-        }
-        header a, .btn {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-        header a:hover, .btn:hover {
-            color: #68026b;
-        }
-        .btn {
-            display: inline-block;
-            background: #444;
-            padding: 7px 20px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-        .questions {
-            margin: 20px 0;
-            display: none; /* Inicialmente esconde o conteúdo das perguntas */
-        }
-        .question {
-            background: #2d2d2d;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-left: 4px solid #68026b;
-            border-radius: 5px;
-        }
-        .question h3 {
-            margin: 0 0 10px;
-            color: #ffcc00;
-        }
-        .question p {
-            margin: 0;
-            line-height: 1.6;
-        }
-        #question-form {
-            display: flex;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        #question {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            background: #333;
-            color: #fff;
-        }
-        #category-select {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            background: #333;
-            color: #fff;
-        }
-        #search-input {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-            background: #333;
-            color: #fff;
-        }
-        #question:focus, #category-select:focus, #search-input:focus {
-            outline: none;
-            background: #444;
-        }
-        .intro-message {
-            background: #2d2d2d;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .intro-message h2 {
-            margin-top: 0;
-            color: #ffcc00;
-        }
-        .intro-message p {
-            margin: 10px 0;
-        }
-        .intro-message a {
-            color: #68026b;
-            text-decoration: none;
-        }
-        .intro-message a:hover {
-            text-decoration: underline;
-        }
-        .intro-message img {
-            width: 32px;
-            height: 32px;
-            margin-top: 10px;
-            background-color: transparent; 
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            font-size: 18px;
-            color: #ffcc00;
-            margin-top: 20px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1e1e1e;
+        margin: 0;
+        padding: 0;
+        color: #ffffff;
+      }
+
+      .contact-form {
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: calc(50% - 2rem);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #555;
+        border-radius: 5px;
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+        resize: none;
+      }
+      .contact-form button {
+        width: 50%;
+        background-color: #800080;
+        color: #fff;
+        border: none;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 5px;
+      }
+      .contact-form button:hover {
+        background-color: #5a005a;
+      }
+      .social-links a {
+        color: #e0e0e0;
+        margin: 0 0.5rem;
+        text-decoration: none;
+        transition: color 0.3s, transform 0.3s;
+      }
+      .social-links a:hover {
+        color: #800080;
+        transform: scale(1.1);
+      }
+      #formMessage {
+        margin-top: 1rem;
+        color: #e0e0e0;
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      #formMessage.success {
+        color: #4caf50;
+      }
+
+      #formMessage.error {
+        color: #f44336;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
+      header {
+        background: #333;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0;
+        min-height: 70px;
+        border-bottom: #68026b 3px solid;
+      }
+      header h1 {
+        margin: 0;
+      }
+      header a,
+      .btn {
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+      }
+      header a:hover,
+      .btn:hover {
+        color: #68026b;
+      }
+      .btn {
+        display: inline-block;
+        background: #444;
+        padding: 7px 20px;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+      .questions {
+        margin: 20px 0;
+        display: none; /* Inicialmente esconde o conteúdo das perguntas */
+      }
+      .question {
+        background: #2d2d2d;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-left: 4px solid #68026b;
+        border-radius: 5px;
+      }
+      .question h3 {
+        margin: 0 0 10px;
+        color: #ffcc00;
+      }
+      .question p {
+        margin: 0;
+        line-height: 1.6;
+      }
+      #question-form {
+        display: flex;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+      #question {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        background: #333;
+        color: #fff;
+      }
+      #category-select {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        background: #333;
+        color: #fff;
+      }
+      #search-input {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        background: #333;
+        color: #fff;
+      }
+      #question:focus,
+      #category-select:focus,
+      #search-input:focus {
+        outline: none;
+        background: #444;
+      }
+      .intro-message {
+        background: #2d2d2d;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .intro-message h2 {
+        margin-top: 0;
+        color: #ffcc00;
+      }
+      .intro-message p {
+        margin: 10px 0;
+      }
+      .intro-message a {
+        color: #68026b;
+        text-decoration: none;
+      }
+      .intro-message a:hover {
+        text-decoration: underline;
+      }
+      .intro-message img {
+        width: 32px;
+        height: 32px;
+        margin-top: 10px;
+        background-color: transparent;
+      }
+      .loading {
+        display: none;
+        text-align: center;
+        font-size: 18px;
+        color: #ffcc00;
+        margin-top: 20px;
+      }
+      .icon {
+        margin-right: 5px;
+      }
+      
+      @media (max-width: 1400px) {
+        .contact-form input,
+      .contact-form textarea {
+        width: calc(100% - 2rem);
+        
+      }
+      .contact-form button {
+        width: 100%;
+      }
+  }
     </style>
-</head>
-<body>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAM25K2J440xBL5fcCpvz13AHtgXR9JOIQ",
-    authDomain: "learnanything-2420b.firebaseapp.com",
-    projectId: "learnanything-2420b",
-    storageBucket: "learnanything-2420b.appspot.com",
-    messagingSenderId: "329006687056",
-    appId: "1:329006687056:web:f20ba7ccc67aa07ebec255",
-    measurementId: "G-FCR4GZLPBF"
-  };
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body);"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+  <body>
     {% load static %}
     <header>
-        <h1>Learn Anything</h1>
+      <h1><i class="fas fa-graduation-cap icon"></i>Learn Anything</h1>
     </header>
     <div class="container">
-        <form id="question-form">
-            <input type="text" id="question" placeholder="O que você quer aprender?" required>
-            <button type="submit" class="btn" id="submit-button">Enviar</button>
-        </form>
-        <select id="category-select">
-            <option value="" disabled selected>Selecionar categoria</option>
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
-        <input type="text" id="search-input" placeholder="Buscar conteúdo">
-        <button type="button" class="btn" id="search-button">Buscar</button>
-        <div class="loading" id="loading-message">Carregando</div>
-        <div class="intro-message" id="intro-message">
-            <h2>Bem-vindo ao Learn Anything!</h2>
-            <p>Para começar, digite o que você quer aprender ou selecione uma categoria do menu.</p>
-            <p>Não pesquise por matéria (ex.: Química). Em vez disso, pesquise por conteúdos específicos relacionados à matéria (ex.: Reações químicas).</p>
-            <p>Este é um projeto open source. Contribuições são bem-vindas!</p>
-            <p>Confira o repositório no GitHub:</p>
-            <a href="https://github.com/SimpleDioney/learn-anything" target="_blank">
-                <img src="{% static 'images/GitHub_logo.png' %}" alt="GitHub">
-            </a>
-            
-            <!-- Adicionando mais informações -->
-            <h3>Como Utilizar o Learn Anything</h3>
-            <ul>
-                <li>Digite tópicos específicos no campo de busca para obter melhores resultados.</li>
-                <li>Navegue pelas categorias disponíveis no menu para explorar diferentes áreas de conhecimento.</li>
-                <li>Utilize a caixa de pesquisa para refinar sua busca e encontrar exatamente o que você precisa.</li>
-            </ul>
-        
-            <h3>Recursos Úteis</h3>
-            <ul>
-                <li><a href="https://embreve.com/" target="_blank">Learn Anything Site Oficial</a></li>
-                <li><a href="https://www.pt.khanacademy.org/" target="_blank">Khan Academy</a> - Recursos gratuitos para várias disciplinas.</li>
-                <li><a href="https://www.coursera.org/" target="_blank">Coursera</a> - Cursos online de universidades e empresas líderes.</li>
-            </ul>
-        
-            <h3>Entre em Contato</h3>
-            <p>Tem alguma dúvida ou sugestão? Entre em contato conosco:</p>
-            <ul>
-                <li>Email: dioneygabriel20@gmail.com</li>
-                <li>GitHub Issues: <a href="https://github.com/SimpleDioney/learn-anything/issues" target="_blank">Reportar um problema</a></li>
-            </ul>
+      <form id="question-form">
+        <input
+          type="text"
+          id="question"
+          placeholder="O que você quer aprender?"
+          required
+        />
+        <button type="submit" class="btn" id="submit-button">
+          <i class="fas fa-paper-plane icon"></i>Enviar
+        </button>
+      </form>
+      <select id="category-select">
+        <option value="" disabled selected>Selecionar categoria</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+      </select>
+      <input type="text" id="search-input" placeholder="Buscar conteúdo" />
+      <button type="button" class="btn" id="search-button">
+        <i class="fas fa-search icon"></i>Buscar
+      </button>
+      <div class="loading" id="loading-message">Carregando</div>
+      <div class="intro-message" id="intro-message">
+        <h2>Bem-vindo ao Learn Anything!</h2>
+        <p>
+          Para começar, digite o que você quer aprender ou selecione uma
+          categoria do menu.
+        </p>
+        <p>
+          Não pesquise por matéria (ex.: Química). Em vez disso, pesquise por
+          conteúdos específicos relacionados à matéria (ex.: Reações químicas).
+        </p>
+        <p>Este é um projeto open source. Contribuições são bem-vindas!</p>
+        <p>Confira o repositório no GitHub:</p>
+        <a
+          href="https://github.com/SimpleDioney/learn-anything"
+          target="_blank"
+        >
+          <i class="fab fa-github icon"></i>
+        </a>
+
+        <!-- Adicionando mais informações -->
+        <h3>
+          <i class="fas fa-info-circle icon"></i>Como Utilizar o Learn Anything
+        </h3>
+        <ul>
+          <li>
+            <i class="fas fa-check icon"></i>Digite tópicos específicos no campo
+            de busca para obter melhores resultados.
+          </li>
+          <li>
+            <i class="fas fa-check icon"></i>Navegue pelas categorias
+            disponíveis no menu para explorar diferentes áreas de conhecimento.
+          </li>
+          <li>
+            <i class="fas fa-check icon"></i>Utilize a caixa de pesquisa para
+            refinar sua busca e encontrar exatamente o que você precisa.
+          </li>
+        </ul>
+
+        <h3><i class="fas fa-book icon"></i>Recursos Úteis</h3>
+        <ul>
+          <li>
+            <a
+              href="https://140f-2804-1b0-1902-fb86-648e-dce9-3c28-d37b.ngrok-free.app/"
+              target="_blank"
+              ><i class="fas fa-link icon"></i>Learn Anything Site Oficial</a
+            >
+          </li>
+          <li>
+            <a href="https://www.pt.khanacademy.org/" target="_blank"
+              ><i class="fas fa-link icon"></i>Khan Academy</a
+            >
+            - Recursos gratuitos para várias disciplinas.
+          </li>
+          <li>
+            <a href="https://www.coursera.org/" target="_blank"
+              ><i class="fas fa-link icon"></i>Coursera</a
+            >
+            - Cursos online de universidades e empresas líderes.
+          </li>
+        </ul>
+
+        <h3><i class="fas fa-envelope icon"></i>Entre em Contato</h3>
+        <p>Tem alguma dúvida ou sugestão? Entre em contato conosco:</p>
+        <ul>
+          <li>
+            <i class="fas fa-envelope icon"></i>Email: dioneygabriel20@gmail.com
+          </li>
+          <li>
+            <i class="fab fa-github icon"></i>GitHub Issues:
+            <a
+              href="https://github.com/SimpleDioney/learn-anything/issues"
+              target="_blank"
+              >Reportar um problema</a
+            >
+          </li>
+        </ul>
+        <div class="contact-form">
+          <h3>Ou envie uma mensagem</h3>
+          <form
+            id="contactForm"
+            action="https://formspree.io/f/mzbnlywa"
+            method="POST"
+          >
+            <input type="text" name="name" placeholder="Seu Nome" required />
+            <input type="email" name="email" placeholder="Seu Email" required />
+            <textarea
+              name="message"
+              placeholder="Sua Mensagem"
+              required
+            ></textarea>
+            <button type="submit">Enviar</button>
+          </form>
+          <div id="formMessage"></div>
+          <div class="social-links">
+            <p>Me encontre nas redes sociais:</p>
+            <a href="https://github.com/SimpleDioney" target="_blank">GitHub</a>
+            |
+            <a href="https://instagram.com/lil_dioney" target="_blank"
+              >Instagram</a
+            >
+          </div>
         </div>
-        
-        <div class="questions" id="questions"></div>
+      </div>
+
+      <div class="questions" id="questions"></div>
     </div>
     <script>
-        function showQuestions() {
-            const questionsDiv = document.getElementById('questions');
-            const introMessage = document.getElementById('intro-message');
-            if (introMessage) {
-                introMessage.style.display = 'none';
-            }
-            questionsDiv.style.display = 'block';
-        }
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Impede o envio padrão do formulário
 
-        function addQuestionToDOM(question, answer) {
-            const questionDiv = document.createElement('div');
-            questionDiv.classList.add('question');
-            questionDiv.innerHTML = `<h3>${question}</h3><div>${answer}</div>`;
-            const questionsContainer = document.getElementById('questions');
-            questionsContainer.prepend(questionDiv);
-        }
+          const form = event.target;
+          const formData = new FormData(form);
+          const formMessage = document.getElementById("formMessage");
 
-        function animateLoadingMessage() {
-            const loadingMessage = document.getElementById('loading-message');
-            let dots = 0;
-            return setInterval(() => {
-                dots = (dots + 1) % 4;
-                loadingMessage.textContent = 'Carregando' + '.'.repeat(dots);
-            }, 500);
-        }
-
-        document.getElementById('question-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const question = document.getElementById('question').value;
-            const submitButton = document.getElementById('submit-button');
-            const loadingMessage = document.getElementById('loading-message');
-            submitButton.disabled = true; 
-            loadingMessage.style.display = 'block'; 
-            const loadingInterval = animateLoadingMessage(); // Inicia a animação de carregamento
-
-            const response = await fetch('/ask/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-CSRFToken': '{{ csrf_token }}'  
-                },
-                body: new URLSearchParams({ 'question': question })
-            });
-            const data = await response.json();
-            document.getElementById('question').value = '';
-            const questionDiv = document.createElement('div');
-            questionDiv.classList.add('question');
-            questionDiv.innerHTML = `<h3>${data.question}</h3><div>${data.answer}</div>`;
-            const questionsContainer = document.getElementById('questions');
-            questionsContainer.innerHTML = ''; 
-            questionsContainer.prepend(questionDiv);
-
-            clearInterval(loadingInterval); // Para a animação de carregamento
-            loadingMessage.style.display = 'none'; 
-            submitButton.disabled = false; 
-
-            showQuestions(); 
-        });
-
-        document.getElementById('category-select').addEventListener('change', async function(e) {
-            const categoryId = e.target.value;
-            const response = await fetch(`/questions/category/${categoryId}/`);
-            const data = await response.json();
-            const questionsDiv = document.getElementById('questions');
-            questionsDiv.innerHTML = ''; 
-            const categoryHeader = document.createElement('h2');
-            categoryHeader.textContent = data.name;
-            questionsDiv.appendChild(categoryHeader);
-            data.questions.forEach(q => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-                questionDiv.innerHTML = `<h3>${q.question}</h3><div>${q.answers.join('<br>')}</div>`;
-                questionsDiv.appendChild(questionDiv);
-            });
-
-            showQuestions(); 
-        });
-
-        document.getElementById('search-button').addEventListener('click', async function() {
-            const query = document.getElementById('search-input').value;
-            if (query.trim() === '') return;
-
-            const response = await fetch(`/search/?q=${encodeURIComponent(query)}`);
-            const data = await response.json();
-            const questionsDiv = document.getElementById('questions');
-            questionsDiv.innerHTML = ''; 
-            if (data.length > 0) {
-                data.forEach(result => {
-                    const questionDiv = document.createElement('div');
-                    questionDiv.classList.add('question');
-                    questionDiv.innerHTML = `<h3>${result.question} - ${result.category}</h3><div>${result.answer}</div>`;
-                    questionsDiv.appendChild(questionDiv);
+          fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.ok) {
+                formMessage.textContent = "Mensagem enviada com sucesso!";
+                formMessage.classList.add("success");
+                formMessage.classList.remove("error");
+                form.reset();
+              } else {
+                return response.json().then((data) => {
+                  if (data.errors) {
+                    formMessage.textContent = data.errors
+                      .map((error) => error.message)
+                      .join(", ");
+                  } else {
+                    formMessage.textContent =
+                      "Ocorreu um erro ao enviar a mensagem.";
+                  }
+                  formMessage.classList.add("error");
+                  formMessage.classList.remove("success");
                 });
-            } else {
-                questionsDiv.innerHTML = '<p>Nenhum resultado encontrado.</p>';
-            }
-
-            showQuestions(); 
+              }
+            })
+            .catch((error) => {
+              formMessage.textContent = "Ocorreu um erro ao enviar a mensagem.";
+              formMessage.classList.add("error");
+              formMessage.classList.remove("success");
+            });
         });
 
-        async function loadQuestions() {
-            const response = await fetch('/questions/');
-            const data = await response.json();
-            const questionsDiv = document.getElementById('questions');
-            questionsDiv.innerHTML = ''; 
-            data.forEach(category => {
-                const categoryHeader = document.createElement('h2');
-                categoryHeader.textContent = category.name;
-                questionsDiv.appendChild(categoryHeader);
-                category.questions.forEach(q => {
-                    addQuestionToDOM(q.question, q.answers.join('<br>'));
-                });
-            });
+      function showQuestions() {
+        const questionsDiv = document.getElementById("questions");
+        const introMessage = document.getElementById("intro-message");
+        if (introMessage) {
+          introMessage.style.display = "none";
         }
+        questionsDiv.style.display = "block";
+      }
 
-        loadQuestions();
+      function addQuestionToDOM(question, answer) {
+        const questionDiv = document.createElement("div");
+        questionDiv.classList.add("question");
+        questionDiv.innerHTML = `<h3>${question}</h3><div>${answer}</div>`;
+        const questionsContainer = document.getElementById("questions");
+        questionsContainer.prepend(questionDiv);
+      }
+
+      function animateLoadingMessage() {
+        const loadingMessage = document.getElementById("loading-message");
+        let dots = 0;
+        return setInterval(() => {
+          dots = (dots + 1) % 4;
+          loadingMessage.textContent = "Carregando" + ".".repeat(dots);
+        }, 500);
+      }
+
+      document
+        .getElementById("question-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const question = document.getElementById("question").value;
+          const submitButton = document.getElementById("submit-button");
+          const loadingMessage = document.getElementById("loading-message");
+          submitButton.disabled = true;
+          loadingMessage.style.display = "block";
+          const loadingInterval = animateLoadingMessage(); // Inicia a animação de carregamento
+
+          const response = await fetch("/ask/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: new URLSearchParams({ question: question }),
+          });
+          const data = await response.json();
+          document.getElementById("question").value = "";
+          const questionDiv = document.createElement("div");
+          questionDiv.classList.add("question");
+          questionDiv.innerHTML = `<h3>${data.question}</h3><div>${data.answer}</div>`;
+          const questionsContainer = document.getElementById("questions");
+          questionsContainer.innerHTML = "";
+          questionsContainer.prepend(questionDiv);
+
+          clearInterval(loadingInterval); // Para a animação de carregamento
+          loadingMessage.style.display = "none";
+          submitButton.disabled = false;
+
+          showQuestions();
+        });
+
+      document
+        .getElementById("category-select")
+        .addEventListener("change", async function (e) {
+          const categoryId = e.target.value;
+          const response = await fetch(`/questions/category/${categoryId}/`);
+          const data = await response.json();
+          const questionsDiv = document.getElementById("questions");
+          questionsDiv.innerHTML = "";
+          const categoryHeader = document.createElement("h2");
+          categoryHeader.textContent = data.name;
+          questionsDiv.appendChild(categoryHeader);
+          data.questions.forEach((q) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.classList.add("question");
+            questionDiv.innerHTML = `<h3>${
+              q.question
+            }</h3><div>${q.answers.join("<br>")}</div>`;
+            questionsDiv.appendChild(questionDiv);
+          });
+
+          showQuestions();
+        });
+
+      document
+        .getElementById("search-button")
+        .addEventListener("click", async function () {
+          const query = document.getElementById("search-input").value;
+          if (query.trim() === "") return;
+
+          const response = await fetch(
+            `/search/?q=${encodeURIComponent(query)}`
+          );
+          const data = await response.json();
+          const questionsDiv = document.getElementById("questions");
+          questionsDiv.innerHTML = "";
+          if (data.length > 0) {
+            data.forEach((result) => {
+              const questionDiv = document.createElement("div");
+              questionDiv.classList.add("question");
+              questionDiv.innerHTML = `<h3>${result.question} - ${result.category}</h3><div>${result.answer}</div>`;
+              questionsDiv.appendChild(questionDiv);
+            });
+          } else {
+            questionsDiv.innerHTML = "<p>Nenhum resultado encontrado.</p>";
+          }
+
+          showQuestions();
+        });
+
+      async function loadQuestions() {
+        const response = await fetch("/questions/");
+        const data = await response.json();
+        const questionsDiv = document.getElementById("questions");
+        questionsDiv.innerHTML = "";
+        data.forEach((category) => {
+          const categoryHeader = document.createElement("h2");
+          categoryHeader.textContent = category.name;
+          questionsDiv.appendChild(categoryHeader);
+          category.questions.forEach((q) => {
+            addQuestionToDOM(q.question, q.answers.join("<br>"));
+          });
+        });
+      }
+
+      loadQuestions();
     </script>
-</body>
+  </body>
 </html>
